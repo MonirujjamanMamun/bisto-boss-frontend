@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import BistoBoss from '../../components/Home/BistoBoss/BistoBoss';
 import CallUs from '../../components/Home/CallUs/CallUs';
 import HeroCarousel from '../../components/Home/Carousel/HeroCarousel';
@@ -10,6 +11,9 @@ import Testimonials from '../../components/Home/Testimonials/Testimonials';
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Bisto Boss | Home</title>
+      </Helmet>
       <HeroCarousel />
       <div className="container mx-auto">
         <OrderOnline />
