@@ -1,12 +1,14 @@
 import { Helmet } from 'react-helmet-async';
 import manuImg from '../../assets/menu/banner3.jpg';
+import dessertImg from '../../assets/menu/dessert-bg.jpeg';
+import pizzaImg from '../../assets/menu/pizza-bg.jpg';
+import saladImg from '../../assets/menu/salad-bg.jpg';
+import soupImg from '../../assets/menu/soup-bg.jpg';
+
 import Parallax from '../../components/Share/Parallax/Parallax';
-import TodayOffer from '../../components/Menu/TodayOffer/TodayOffer';
 import useMenu from '../../hooks/useMenu';
-import Pizza from '../../components/Menu/Pizza/Pizza';
-import Dessert from '../../components/Menu/Dessert/Dessert';
-import Salads from '../../components/Menu/Salads/Salads';
-import Soup from '../../components/Menu/Soup/Soup';
+import MenuGroup from '../../components/Menu/MenuGroup/MenuGroup';
+import Title from '../../components/Share/Title/Title';
 
 const Menu = () => {
   const [menu] = useMenu();
@@ -15,7 +17,7 @@ const Menu = () => {
   const dessert = menu.filter((data) => data.category === 'dessert');
   const salad = menu.filter((data) => data.category === 'salad');
   const soup = menu.filter((data) => data.category === 'soup');
-  console.log(salad);
+
   return (
     <div>
       <Helmet>
@@ -24,11 +26,15 @@ const Menu = () => {
       <div className="">
         <Parallax img={manuImg} title="OUR MENU" />
       </div>
-      <TodayOffer category={todayOffer} />
-      <Dessert dessert={dessert} />
-      <Pizza pizza={pizza} />
-      <Salads salads={salad} />
-      <Soup soup={soup} />
+      <div>
+        <Title hading="TODAY'S OFFER" subHading={"Don't miss"} />
+      </div>
+
+      <MenuGroup items={todayOffer} />
+      <MenuGroup items={dessert} title={'dessert'} img={dessertImg} />
+      <MenuGroup items={pizza} title={'pizza'} img={pizzaImg} />
+      <MenuGroup items={salad} title={'salad'} img={saladImg} />
+      <MenuGroup items={soup} title={'soup'} img={soupImg} />
     </div>
   );
 };
