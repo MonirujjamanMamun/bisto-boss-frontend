@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../../context/AuthContext/AuthContext';
 
 const NavBar = () => {
+  const { user, logout } = useAuth();
   const navLink = (
     <>
       <li>
@@ -30,6 +32,13 @@ const NavBar = () => {
       </li>
     </>
   );
+  const handelLogOut = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.log('logout error', error.message);
+    }
+  };
   return (
     <>
       <div className="fixed z-30 navbar shadow-lg backdrop-blur-md py-3">
@@ -68,7 +77,24 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn uppercase bg-transparent border-0">Sign Up</a>
+          {user && <button>{user?.displayName}</button>}
+          {user ? (
+            <>
+              <button
+                onClick={handelLogOut}
+                className="btn uppercase bg-transparent border-0"
+              >
+                Log out
+              </button>
+            </>
+          ) : (
+            <Link
+              to="auth/login"
+              className="btn uppercase bg-transparent border-0"
+            >
+              Log in
+            </Link>
+          )}
         </div>
       </div>
     </>

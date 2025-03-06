@@ -6,7 +6,7 @@ const TodayOffer = ({ category }) => {
     <div className="container mx-auto my-11">
       <Title hading="TODAY'S OFFER" subHading={"Don't miss"} />
       <div className="grid md:grid-cols-2 gap-9 my-7">
-        {category.map((data) => (
+        {category?.map((data) => (
           <MenuItem key={data._id} {...data} />
         ))}
       </div>

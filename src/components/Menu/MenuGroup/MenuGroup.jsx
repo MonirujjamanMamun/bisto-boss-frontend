@@ -9,7 +9,7 @@ const MenuGroup = ({ items, img, title }) => {
       {img && <Parallax img={img} title={title} />}
       <div className="container mx-auto">
         <div className="grid md:grid-cols-2 gap-9 my-7">
-          {items?.slice(0, 6).map((data) => (
+          {items?.slice(0, 6)?.map((data) => (
             <MenuItem key={data._id} {...data} />
           ))}
         </div>
