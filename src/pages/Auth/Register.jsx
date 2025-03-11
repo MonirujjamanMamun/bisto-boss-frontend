@@ -95,14 +95,14 @@ const Register = () => {
           </div>
           <input
             type="submit"
-            value={'Submit'}
-            className="rounded-md bg-sky-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700"
+            value={'Sign Up'}
+            className="w-full rounded-md bg-[#D1A054] px-4 py-2 text-white transition-colors"
           />
         </form>
         <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
           Have an account?
           <Link to="/auth/login" className="font-semibold underline">
-            Login
+            Sign In
           </Link>
         </p>
         <div className="my-8 flex items-center">

@@ -1,3 +1,4 @@
+import { GiShoppingCart } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext/AuthContext';
 
@@ -77,6 +78,14 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
+          <Link to="/cart">
+            <div className="relative w-fit mx-3">
+              <GiShoppingCart className="text-4xl" />
+              <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] text-white">
+                12
+              </span>
+            </div>
+          </Link>
           {user && <button>{user?.displayName}</button>}
           {user ? (
             <>

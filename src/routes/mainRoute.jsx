@@ -9,6 +9,7 @@ import LogIn from '../pages/Auth/LogIn';
 import AuthLayout from '../pages/Auth/AuthLayout';
 import Register from '../pages/Auth/Register';
 import PrivetRoute from './PrivetRoute';
+import Cart from '../pages/Cart/Cart';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,14 @@ const router = createBrowserRouter([
       {
         path: '/contactus',
         element: <ContactUs />,
+      },
+      {
+        path: '/cart',
+        element: (
+          <PrivetRoute>
+            <Cart />
+          </PrivetRoute>
+        ),
       },
     ],
   },

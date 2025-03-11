@@ -72,14 +72,14 @@ const LogIn = () => {
           </div>
           <input
             type="submit"
-            value={'Submit'}
-            className="w- rounded-md bg-sky-500 px-4 py-2 text-white transition-colors hover:bg-sky-600 dark:bg-sky-700"
+            value={'Sign In'}
+            className="w-full rounded-md bg-[#D1A054] px-4 py-2 text-white transition-colors "
           />
         </form>
         <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
           Don&apos;t have an account?
           <Link to="/auth/register" className="font-semibold underline">
-            Signup
+            Sign Up
           </Link>
         </p>
         <div className="my-8 flex items-center">

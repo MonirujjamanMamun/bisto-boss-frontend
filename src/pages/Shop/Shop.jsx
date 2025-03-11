@@ -17,6 +17,7 @@ const Shop = () => {
 
   const [menu] = useMenu();
   const pizza = menu.filter((data) => data.category === 'pizza');
+  console.log('menu', pizza);
   const salad = menu.filter((data) => data.category === 'salad');
   const soup = menu.filter((data) => data.category === 'soup');
   const dessert = menu.filter((data) => data.category === 'dessert');
