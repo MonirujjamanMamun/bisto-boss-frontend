@@ -15,7 +15,7 @@ import { Navigation } from 'swiper/modules';
 const Testimonials = () => {
   const [comment, setComment] = useState([]);
   useEffect(() => {
-    fetch('https://bisto-boss-backend.vercel.app/api/review')
+    fetch(`${import.meta.env.VITE_BASE_URL}/review`)
       .then((res) => res.json())
       .then((data) => setComment(data.reviews));
   }, []);

@@ -6,7 +6,7 @@ import useMenu from '../../../hooks/useMenu';
 const OurMenu = () => {
   // const [menu, setMenu] = useState([]);
   // useEffect(() => {
-  //   fetch('https://bisto-boss-backend.vercel.app/api/menu')
+  //   fetch(`${import.meta.env.VITE_BASE_URL}/menu`)
   //     .then((res) => res.json())
   //     .then((data) => {
   //       console.log(data);

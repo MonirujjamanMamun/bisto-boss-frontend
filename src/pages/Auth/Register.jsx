@@ -1,8 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext/AuthContext';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
+import { setToken } from '../../utils/setToken';
 
 const Register = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     reset,
@@ -13,17 +17,40 @@ const Register = () => {
   const navigate = useNavigate();
   const { registerUser, updateUserProfile } = useAuth();
 
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     try {
-      const registerUserdata = await registerUser(data.email, data.password);
-      const updateUser = await updateUserProfile(data.name, data.photoUrl);
-      reset();
-      console.log('after register user', registerUserdata, updateUser);
-      navigate('/');
+      registerUser(data.email, data.password).then((result) => {
+        const user = result.user;
+        // console.log('user', user);
+        updateUserProfile(data.name, data.photoUrl).then(() => {
+          // Refetch user to get updated name
+          const updatedUser = {
+            uid: user.uid,
+            name: data.name, // Use manually provided name instead
+            email: data.email,
+          };
+          // console.log('update user', updatedUser);
+          axiosPublic.post('/register', updatedUser).then((res) => {
+            if (res) {
+              setToken(res.data.token);
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User created successfully.',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              reset();
+              navigate('/');
+            }
+          });
+        });
+      });
     } catch (error) {
       console.log('register error', error.message);
     }
   };
+
   return (
     <section className="mt-11">
       <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">

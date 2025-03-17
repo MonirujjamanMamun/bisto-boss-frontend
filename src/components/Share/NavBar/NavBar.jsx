@@ -1,6 +1,7 @@
 import { GiShoppingCart } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../../context/AuthContext/AuthContext';
+import { removeToken } from '../../../utils/removeToken';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
@@ -36,6 +37,7 @@ const NavBar = () => {
   const handelLogOut = async () => {
     try {
       await logout();
+      removeToken();
     } catch (error) {
       console.log('logout error', error.message);
     }

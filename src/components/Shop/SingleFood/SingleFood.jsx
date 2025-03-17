@@ -32,7 +32,7 @@ const SingleFood = ({ item }) => {
         <img src={image} alt="Shoes" className="rounded-xl" />
       </figure>
       <p className="absolute top-3 right-5 bg-black text-white py-1 px-3 rounded-sm">
-        {price}
+        ${price}
       </p>
       <small className="text-left ps-3">{category}</small>
       <div className="card-body items-center text-center">

@@ -4,7 +4,7 @@ const useMenu = () => {
   const [menu, setMenu] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    fetch('https://bisto-boss-backend.vercel.app/api/menu')
+    fetch(`${import.meta.env.VITE_BASE_URL}/menu`)
       .then((res) => res.json())
       .then((data) => {
         setMenu(data.menus);

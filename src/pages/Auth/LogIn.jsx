@@ -1,8 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext/AuthContext';
+import useAxiosPublic from '../../hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
+import { setToken } from '../../utils/setToken';
 
 const LogIn = () => {
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     reset,
@@ -14,12 +18,32 @@ const LogIn = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
   const from = location.state?.from?.pathname || '/';
-  const onSubmit = async (data) => {
+  const onSubmit = (data) => {
     try {
-      await login(data.email, data.password);
-      reset();
-      navigate(from, { replace: true });
-      console.log('user login');
+      login(data.email, data.password).then((res) => {
+        if (res) {
+          const userInfo = {
+            uid: res.user.uid,
+            email: res.user.email,
+          };
+          axiosPublic.post('/login', userInfo).then((result) => {
+            if (result) {
+              // console.log('form log result', result);
+              setToken(result.data.token);
+              reset();
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User Login Successful.',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigate(from, { replace: true });
+            }
+          });
+        }
+      });
+      // console.log('user login');
     } catch (error) {
       console.log('user login error', error.message);
     }
