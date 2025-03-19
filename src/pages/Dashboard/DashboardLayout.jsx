@@ -18,50 +18,43 @@ import useAuth from '../../hooks/useAuth';
 const DashboardLayout = () => {
   const { user } = useAuth();
   console.log('dashboard', user);
+  const activeLink = ({
+    isActive,
+  }) => `flex items-center text-[16px] font-bold uppercase
+  ${
+    isActive
+      ? 'text-blue-500 font-bold bg-black py-3 px-5 rounded'
+      : 'text-white'
+  }`;
   const adminNavLink = (
     <>
-      <li className="flex items-center my-6">
-        <IoMdHome className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/adminhome'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className=" m-1">
+        <NavLink to={'/dashboard/adminhome'} className={activeLink}>
+          <IoMdHome className="w-6 h-6 mr-1" />
           Admin Home
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <ImSpoonKnife className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/additem'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/additem'} className={activeLink}>
+          <ImSpoonKnife className="w-6 h-6 mr-1" />
           add items
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <FaList className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/manageitem'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/manageitem'} className={activeLink}>
+          <FaList className="w-6 h-6 mr-1" />
           manage items
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <FaBook className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/managebooking'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/managebooking'} className={activeLink}>
+          <FaBook className="w-6 h-6 mr-1" />
           Manage bookings
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <FaUsers className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/alluser'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/alluser'} className={activeLink}>
+          <FaUsers className="w-6 h-6 mr-1" />
           all users
         </NavLink>
       </li>
@@ -69,57 +62,39 @@ const DashboardLayout = () => {
   );
   const userNavLink = (
     <>
-      <li className="flex items-center my-6">
-        <IoMdHome className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/userhome'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/userhome'} className={activeLink}>
+          <IoMdHome className="w-6 h-6 mr-1" />
           User Home
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <SlCalender className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/reservation'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/reservation'} className={activeLink}>
+          <SlCalender className="w-6 h-6 mr-1" />
           reservation
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <FaWallet className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/paymenthistory'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/paymenthistory'} className={activeLink}>
+          <FaWallet className="w-6 h-6 mr-1" />
           payment history
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <FaCartShopping className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/mycart'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/mycart'} className={activeLink}>
+          <FaCartShopping className="w-6 h-6 mr-1" />
           my cart
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <MdReviews className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/addreview'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/addreview'} className={activeLink}>
+          <MdReviews className="w-6 h-6 mr-1" />
           add review
         </NavLink>
       </li>
-      <li className="flex items-center my-6">
-        <TbCalendarShare className="w-6 h-6" />
-        <NavLink
-          to={'/dashboard/mybooking'}
-          className="text-[16px] ps-3 font-bold uppercase"
-        >
+      <li className="my-6">
+        <NavLink to={'/dashboard/mybooking'} className={activeLink}>
+          <TbCalendarShare className="w-6 h-6 mr-1" />
           my booking
         </NavLink>
       </li>
@@ -127,8 +102,8 @@ const DashboardLayout = () => {
   );
   return (
     <div className="flex">
-      <div className="w-64 min-h-screen bg-[#D1A054] ps-9 pt-9">
-        <ul>
+      <div className="w-72 min-h-screen bg-[#D1A054] ps-9 pt-9">
+        <ul className="px-5">
           {adminNavLink}
           {userNavLink}
           <div className="divider"></div>
