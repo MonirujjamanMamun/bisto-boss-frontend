@@ -8,15 +8,15 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 const queryClient = new QueryClient();
 
 import router from './routes/mainRoute.jsx';
-import AuthContext from './context/AuthContext/AuthContext.jsx';
+import AuthProvider from './context/AuthContext/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
-        <AuthContext>
+        <AuthProvider>
           <RouterProvider router={router} />
-        </AuthContext>
+        </AuthProvider>
       </QueryClientProvider>
     </HelmetProvider>
   </StrictMode>

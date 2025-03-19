@@ -2,14 +2,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../MainLayout';
 import Home from '../pages/Home/Home';
 import Menu from '../pages/Menu/Menu';
-import Dashboard from '../pages/Dashboard/Dashboard';
 import Shop from '../pages/Shop/Shop';
 import ContactUs from '../pages/ContactUs/ContactUs';
 import LogIn from '../pages/Auth/LogIn';
 import AuthLayout from '../pages/Auth/AuthLayout';
 import Register from '../pages/Auth/Register';
 import PrivetRoute from './PrivetRoute';
-import Cart from '../pages/Cart/Cart';
+import DashboardLayout from '../pages/Dashboard/DashboardLayout';
+import Cart from '../pages/Dashboard/Cart/Cart';
 
 const router = createBrowserRouter([
   {
@@ -24,14 +24,7 @@ const router = createBrowserRouter([
         path: '/menu',
         element: <Menu />,
       },
-      {
-        path: '/dashboard',
-        element: (
-          <PrivetRoute>
-            <Dashboard />
-          </PrivetRoute>
-        ),
-      },
+
       {
         path: '/shop/:category',
         element: <Shop />,
@@ -40,14 +33,14 @@ const router = createBrowserRouter([
         path: '/contactus',
         element: <ContactUs />,
       },
-      {
-        path: '/cart',
-        element: (
-          <PrivetRoute>
-            <Cart />
-          </PrivetRoute>
-        ),
-      },
+      // {
+      //   path: '/cart',
+      //   element: (
+      //     <PrivetRoute>
+      //       <Cart />
+      //     </PrivetRoute>
+      //   ),
+      // },
     ],
   },
   {
@@ -61,6 +54,20 @@ const router = createBrowserRouter([
       {
         path: 'register',
         element: <Register />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <PrivetRoute>
+        <DashboardLayout />
+      </PrivetRoute>
+    ),
+    children: [
+      {
+        path: 'cart',
+        element: <Cart />,
       },
     ],
   },

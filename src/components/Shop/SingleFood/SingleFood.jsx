@@ -1,15 +1,33 @@
 import Swal from 'sweetalert2';
-import { useAuth } from '../../../context/AuthContext/AuthContext';
 import { useLocation, useNavigate } from 'react-router-dom';
+import useAxiosSecure from '../../../hooks/useAxiosSecure';
+import useAuth from '../../../hooks/useAuth';
+import useCart from '../../../hooks/useCart';
 
 const SingleFood = ({ item }) => {
   const { name, recipe, image, category, price } = item;
   const location = useLocation();
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
+  const [, refetch] = useCart();
   const navigate = useNavigate();
   const handelAddToCart = (item) => {
     if (user && user.email) {
-      // TODO:do something later
+      axiosSecure
+        .post('/cart', { menuItemId: item._id, quantity: 1 })
+        .then((res) => {
+          if (res.data.success) {
+            refetch();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: `${item.name} added to your cart`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch((error) => console.error(error.response?.data || error.message));
     } else {
       Swal.fire({
         title: 'You are not login',

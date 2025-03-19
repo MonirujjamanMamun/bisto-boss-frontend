@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -10,15 +10,16 @@ import {
 import app from '../../firebase/firebase.config';
 
 // create a context
-const createAuthContext = createContext();
+export const AuthContext = createContext(null);
 
 // use context
-export const useAuth = () => useContext(createAuthContext);
+// export const useAuth = () => useContext(createAuthContext);
 
 const auth = getAuth(app);
 
-const AuthContext = ({ children }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  console.log('user from authcontext', user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -56,10 +57,8 @@ const AuthContext = ({ children }) => {
   };
 
   return (
-    <createAuthContext.Provider value={userInfo}>
-      {!loading && children}
-    </createAuthContext.Provider>
+    <AuthContext.Provider value={userInfo}>{children}</AuthContext.Provider>
   );
 };
 
-export default AuthContext;
+export default AuthProvider;

@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext/AuthContext';
 import Spiner from '../components/Share/Spiner/Spiner';
+import useAuth from '../hooks/useAuth';
 
 const PrivetRoute = ({ children }) => {
   const location = useLocation();
@@ -8,10 +8,12 @@ const PrivetRoute = ({ children }) => {
   if (loading) {
     return <Spiner />;
   }
-  if (user) {
-    return children;
-  }
-  return <Navigate to={'/auth/login'} state={{ from: location }} replace />;
+
+  return user ? (
+    children
+  ) : (
+    <Navigate to={'/auth/login'} state={{ from: location }} replace />
+  );
 };
 
 export default PrivetRoute;

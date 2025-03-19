@@ -1,10 +1,15 @@
 import { GiShoppingCart } from 'react-icons/gi';
 import { Link } from 'react-router-dom';
-import { useAuth } from '../../../context/AuthContext/AuthContext';
 import { removeToken } from '../../../utils/removeToken';
+import useAuth from '../../../hooks/useAuth';
+import useCart from '../../../hooks/useCart';
+// import { QueryClient } from '@tanstack/react-query';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
+  const [cart, refetch] = useCart();
+  console.log('navebar cart', cart);
+  console.log('user', user);
   const navLink = (
     <>
       <li>
@@ -37,7 +42,9 @@ const NavBar = () => {
   const handelLogOut = async () => {
     try {
       await logout();
+      // QueryClient.clear();
       removeToken();
+      refetch();
     } catch (error) {
       console.log('logout error', error.message);
     }
@@ -80,12 +87,14 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/cart">
+          <Link to="/dashboard/cart">
             <div className="relative w-fit mx-3">
               <GiShoppingCart className="text-4xl" />
-              <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-500 text-center text-[10px] text-white">
-                12
-              </span>
+              {cart?.cartItems?.length > 0 && (
+                <span className="absolute -right-1 -top-2 flex size-6 items-center justify-center rounded-full bg-red-500 text-center text-[15px] text-white font-bold">
+                  {cart.cartItems.length}
+                </span>
+              )}
             </div>
           </Link>
           {user && <button>{user?.displayName}</button>}

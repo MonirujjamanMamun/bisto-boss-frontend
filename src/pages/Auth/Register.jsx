@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext/AuthContext';
 import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { setToken } from '../../utils/setToken';
+import useAuth from '../../hooks/useAuth';
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
@@ -123,7 +123,7 @@ const Register = () => {
           <input
             type="submit"
             value={'Sign Up'}
-            className="w-full rounded-md bg-[#D1A054] px-4 py-2 text-white transition-colors"
+            className="w-full rounded-md bg-[#D1A054] px-4 py-2 text-white transition-colors cursor-pointer"
           />
         </form>
         <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
