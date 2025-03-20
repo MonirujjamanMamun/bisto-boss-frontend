@@ -21,11 +21,7 @@ const DashboardLayout = () => {
   const activeLink = ({
     isActive,
   }) => `flex items-center text-[16px] font-bold uppercase
-  ${
-    isActive
-      ? 'text-blue-500 font-bold bg-black py-3 px-5 rounded'
-      : 'text-white'
-  }`;
+  ${isActive ? 'text-black' : 'text-white'}`;
   const adminNavLink = (
     <>
       <li className=" m-1">
@@ -107,42 +103,45 @@ const DashboardLayout = () => {
           {adminNavLink}
           {userNavLink}
           <div className="divider"></div>
-          <li className="flex items-center my-6">
-            <IoMdHome className="w-6 h-6" />
-            <NavLink to={'/'} className="text-[16px] ps-3 font-bold uppercase">
+          <li className=" my-6">
+            <NavLink
+              to={'/'}
+              className="text-[16px] ps-3 font-bold uppercase flex items-center"
+            >
+              <IoMdHome className="w-6 h-6 mr-1" />
               Home
             </NavLink>
           </li>
-          <li className="flex items-center my-6">
-            <IoMenu className="w-6 h-6" />
+          <li className="my-6">
             <NavLink
               to={'/menu'}
-              className="text-[16px] ps-3 font-bold uppercase"
+              className="flex items-center text-[16px] ps-3 font-bold uppercase"
             >
+              <IoMenu className="w-6 h-6 mr-1" />
               Menu
             </NavLink>
           </li>
-          <li className="flex items-center my-6">
-            <FaShoppingBag className="w-6 h-6" />
+          <li className="my-6">
             <NavLink
               to={'/shop/salad'}
-              className="text-[16px] ps-3 font-bold uppercase"
+              className="flex items-center text-[16px] ps-3 font-bold uppercase"
             >
+              <FaShoppingBag className="w-6 h-6 mr-1" />
               Shop
             </NavLink>
           </li>
-          <li className="flex items-center my-6">
-            <MdEmail className="w-6 h-6" />
+          <li className="my-6">
             <NavLink
               to={'/contactus'}
-              className="text-[16px] ps-3 font-bold uppercase"
+              className="flex items-center text-[16px] ps-3 font-bold uppercase"
             >
+              <MdEmail className="w-6 h-6 mr-1" />
               Contact
             </NavLink>
           </li>
         </ul>
       </div>
-      <div className="ps-11">
+      <div className="ps-11 w-full pt-3 pr-3">
         <Outlet />
       </div>
     </div>

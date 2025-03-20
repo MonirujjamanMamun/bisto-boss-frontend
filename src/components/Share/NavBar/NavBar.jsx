@@ -87,7 +87,7 @@ const NavBar = () => {
           <ul className="menu menu-horizontal px-1">{navLink}</ul>
         </div>
         <div className="navbar-end">
-          <Link to="/dashboard/cart">
+          <Link to="/dashboard/mycart">
             <div className="relative w-fit mx-3">
               <GiShoppingCart className="text-4xl" />
               {cart?.cartItems?.length > 0 && (
