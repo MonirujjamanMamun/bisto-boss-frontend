@@ -4,6 +4,8 @@ import Title from '../../../../components/Share/Title/Title';
 import { CiLocationOn } from 'react-icons/ci';
 import { IoTimeOutline } from 'react-icons/io5';
 import { Helmet } from 'react-helmet-async';
+import { FaCalendar } from 'react-icons/fa';
+import PaymentPage from '../../../../components/Dashboard/User/PaymentPage/PaymentPage';
 
 const Reservation = () => {
   return (
@@ -15,92 +17,107 @@ const Reservation = () => {
       {/* ******************* */}
       <div>
         <section className="mt-4 p-1 xs:p-8">
-          <div className=" max-w-96 sm:max-w-4xl mx-auto rounded-lg p-8">
+          <div className="max-w-96 sm:max-w-4xl mx-auto rounded-lg p-8">
             <form>
               <div className="space-y-6">
                 <div className="grid sm:grid-cols-3 grid-cols-1 gap-6">
+                  {/* *******date field******* */}
+                  <div className="relative h-12 pt-3 mb-4">
+                    <label htmlFor="date" className="font-medium mb-1">
+                      Date*
+                    </label>
+                    <input
+                      type="date"
+                      className="rounded-lg w-full pl-10 p-5"
+                      name="date"
+                    />
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                  </div>
+                  {/* *******time field******* */}
+                  <div className="relative h-12 pt-3 mb-4">
+                    <label htmlFor="time" className="font-medium mb-1">
+                      Time*
+                    </label>
+                    <input
+                      type="time"
+                      className="rounded-lg w-full pl-10 p-5"
+                      name="time"
+                    />
+                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                  </div>
+                  {/* *******guest field******* */}
                   <div>
-                    <label
-                      htmlFor="category"
-                      className="text-xs xs:text-sm font-medium mb-1"
-                    >
-                      Jop Type
+                    <label htmlFor="guest" className="font-medium mb-1">
+                      Guest*
                     </label>
                     <select
                       name="type"
-                      id="type"
-                      className="h-[50px] rounded-[5px] text-xs xs:text-sm border border-[#D1D5DB] w-full px-2"
+                      id="guest"
+                      className="h-[50px] rounded-[5px] border w-full px-2"
                     >
-                      <option value="Hourly" selected="">
-                        Hourly
-                      </option>
-                      <option value="FixedRate">Fixed rate</option>
+                      <option value="person-1">Person -1</option>
+                      <option value="person-1">Person -2</option>
+                      <option value="person-1">Person -3</option>
                     </select>
                   </div>
-                  <div>
-                    <label
-                      htmlFor="from"
-                      className="text-xs xs:text-sm font-medium mb-1"
-                    >
-                      From <span className="font-light">(Optional)</span>
+                  {/* *******name field******* */}
+                  <div className="mt-10">
+                    <label htmlFor="name" className="font-medium mb-3">
+                      Name*
                     </label>
-                    <div className="relative max-w-xs">
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-lg font-medium">
-                        $
-                      </span>
+                    <div className="max-w-xs">
                       <input
                         type="text"
-                        className="h-[50px] rounded-[5px] text-xs xs:text-sm w-full px-2 pl-8 font-light"
-                        placeholder="0.00"
-                        value=""
+                        id="name"
+                        className="h-[50px] rounded-[5px] w-full px-2 pl-8 font-light"
+                        placeholder="Your Name"
                       />
                     </div>
                   </div>
-                  <div>
-                    <label
-                      htmlFor="to"
-                      className="text-xs xs:text-sm font-medium mb-1"
-                    >
-                      To <span className="font-light">(Optional)</span>
+                  {/* *******phone field******* */}
+                  <div className="mt-10">
+                    <label htmlFor="phone" className="font-medium mb-3">
+                      Phone*
                     </label>
-                    <div className="relative max-w-xs">
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-lg font-medium">
-                        $
-                      </span>
+                    <div className="max-w-xs">
                       <input
                         type="text"
-                        className="h-[50px] rounded-[5px] text-xs xs:text-sm w-full px-2 pl-8 font-light"
-                        placeholder="0.00"
-                        value=""
+                        id="phone"
+                        className="h-[50px] rounded-[5px] w-full px-2 pl-8 font-light"
+                        placeholder="Phone Number"
                       />
                     </div>
                   </div>
-                </div>
-                <div className="relative h-12 pt-3 mb-4">
-                  <input
-                    type="date"
-                    className="text-sm rounded-lg w-full pl-10 p-5"
-                    name="date"
-                    value=""
-                  />
-                  <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+                  {/* *******email field******* */}
+                  <div className="mt-10">
+                    <label htmlFor="email" className="font-medium mb-3">
+                      Email*
+                    </label>
+                    <div className="max-w-xs">
+                      <input
+                        type="email"
+                        id="email"
+                        className="h-[50px] rounded-[5px] w-full px-2 pl-8 font-light"
+                        placeholder="Email"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="mt-8 pt-6 border-t flex justify-between">
-                <button className="hidden sm:block underline-offset-8">
-                  back
-                </button>
+              <div className="w-full mt-8 pt-6 flex justify-center items-center">
                 <button
                   type="submit"
-                  className=" sm:w-[86px] w-full h-[50px] text-xs sm:text-base bg-[#4D7C0F] rounded-[5px] p-[13px_25px] gap-[10px] text-white"
+                  className="sm:text-base bg-linear-to-r from-[#835D23] to-[#B58130] rounded-[5px] p-[13px_25px] gap-[10px] flex items-center text-center cursor-pointer"
                 >
-                  Next
+                  Book A Table
+                  <FaCalendar />
                 </button>
               </div>
             </form>
           </div>
         </section>
       </div>
+      <PaymentPage />
       {/* ************** */}
       <Title hading={'OUR LOCATION'} subHading={'Visit Us'} />
       <div className="container mx-auto my-11">

@@ -26,9 +26,9 @@ const MyCart = () => {
       </div>
 
       <div className="overflow-x-auto">
-        <table className="min-w-[90%] shadow-md mx-auto my-6">
-          <thead>
-            <tr className="bg-[#D1A054] rounded-tl-full text-white">
+        <table className="min-w-[90%] shadow-md mx-auto my-6 overflow-hidden">
+          <thead className="">
+            <tr className="bg-[#D1A054] text-white rounded-l-2xl">
               <th className="py-4 px-6 text-lg text-left border-b">#</th>
               <th className="py-4 px-6 text-lg text-left border-b">
                 Items Image
