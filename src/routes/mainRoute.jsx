@@ -20,6 +20,7 @@ import AddItem from '../pages/Dashboard/Admin/AddItem/AddItem';
 import ManageItem from '../pages/Dashboard/Admin/ManageItem/ManageItem';
 import ManageBooking from '../pages/Dashboard/Admin/ManageBooking/ManageBooking';
 import AllUser from '../pages/Dashboard/Admin/AllUser/AllUser';
+import ManageItemEdit from '../pages/Dashboard/Admin/ManageItem/ManageItemEdit';
 
 const router = createBrowserRouter([
   {
@@ -112,6 +113,10 @@ const router = createBrowserRouter([
       {
         path: 'manageitem',
         element: <ManageItem />,
+      },
+      {
+        path: 'manageitem/manageitemedit',
+        element: <ManageItemEdit />,
       },
       {
         path: 'managebooking',

@@ -7,9 +7,10 @@ import useCart from '../../../hooks/useCart';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
+  // console.log('user from navbar', user);
   const [cart, refetch] = useCart();
-  console.log('navebar cart', cart);
-  console.log('user', user);
+  // console.log('navebar cart', cart);
+
   const navLink = (
     <>
       <li>

@@ -3,16 +3,65 @@ import Title from '../../../../components/Share/Title/Title';
 import useUser from '../../../../hooks/useUser';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { MdAdminPanelSettings } from 'react-icons/md';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AllUser = () => {
   const [users, refetch] = useUser();
-  console.log('all user data', users.users);
+  console.log('all user', users?.users);
+  const axiosSecure = useAxiosSecure();
   let allUser = users.users;
   const handelDelete = (id) => {
-    console.log('all user delete handelar', id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to delete this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/deleteuser/${id}`).then((res) => {
+          console.log('from delete handelar', res);
+          if (res.data.success) {
+            refetch();
+            Swal.fire({
+              title: 'Deleted!',
+              text: 'User deleted successfully',
+              icon: 'success',
+            });
+          }
+        });
+      }
+    });
   };
   const handelMakeAdmin = (id) => {
-    console.log('all user make admin handelar', id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to make admin this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, make admin!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/makeadmin/${id}`).then((res) => {
+          console.log('from make admin handelar', res);
+          if (res.data.success) {
+            refetch();
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: `${res.data.message}`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        });
+      }
+    });
   };
   return (
     <div>

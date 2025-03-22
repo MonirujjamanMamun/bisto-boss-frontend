@@ -13,11 +13,9 @@ import { FaCartShopping } from 'react-icons/fa6';
 import { TbCalendarShare } from 'react-icons/tb';
 import { MdEmail, MdReviews } from 'react-icons/md';
 import { IoMenu } from 'react-icons/io5';
-import useAuth from '../../hooks/useAuth';
+
 
 const DashboardLayout = () => {
-  const { user } = useAuth();
-  console.log('dashboard', user);
   const activeLink = ({
     isActive,
   }) => `flex items-center text-[16px] font-bold uppercase
