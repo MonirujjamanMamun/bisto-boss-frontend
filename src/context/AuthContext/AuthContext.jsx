@@ -8,7 +8,6 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
-import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 // create a context
 export const AuthContext = createContext(null);
@@ -50,6 +49,7 @@ const AuthProvider = ({ children }) => {
   };
   const userInfo = {
     user,
+    setUser,
     loading,
     registerUser,
     login,

@@ -44,7 +44,7 @@ const ManageItem = () => {
               <td className="py-4 px-4 text-[16px]">dsas</td>
               <td className="py-4 px-4 text-[16px]">$ dsas</td>
               <td className="py-4 px-6 border-b text-end">
-                <Link to={'/dashboard/manageitem/manageitemedit'}>
+                <Link to={`/dashboard/manageitemedit/${1}`}>
                   <button
                     // onClick={() => handelEdit()}
                     className="w-[50px] h-[50px] bg-[#D1A054] hover:scale-110 scale-100 transition-all duration-100 text-white py-2 px-3 rounded-md cursor-pointer"

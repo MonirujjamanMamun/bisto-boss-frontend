@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 const AllUser = () => {
   const [users, refetch] = useUser();
-  console.log('all user', users?.users);
+  // console.log('all user', users?.users);
   const axiosSecure = useAxiosSecure();
   let allUser = users.users;
   const handelDelete = (id) => {
@@ -23,7 +23,6 @@ const AllUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/deleteuser/${id}`).then((res) => {
-          console.log('from delete handelar', res);
           if (res.data.success) {
             refetch();
             Swal.fire({

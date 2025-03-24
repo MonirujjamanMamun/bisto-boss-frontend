@@ -1,4 +1,8 @@
+import { useLoaderData } from 'react-router-dom';
+
 const ManageItemEdit = () => {
+  const { name, category, recipe, price, _id } = useLoaderData();
+  console.log('manage item edite', name);
   return (
     <div>
       <div>

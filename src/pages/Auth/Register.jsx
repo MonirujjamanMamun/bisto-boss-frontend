@@ -15,7 +15,7 @@ const Register = () => {
   } = useForm();
 
   const navigate = useNavigate();
-  const { registerUser, updateUserProfile } = useAuth();
+  const { registerUser, updateUserProfile, setUser } = useAuth();
 
   const onSubmit = (data) => {
     try {
@@ -32,6 +32,11 @@ const Register = () => {
           // console.log('update user', updatedUser);
           axiosPublic.post('/register', updatedUser).then((res) => {
             if (res) {
+              console.log('from register page', res);
+              setUser((pre) => ({
+                ...pre,
+                ...res.data.user,
+              }));
               setToken(res.data.token);
               Swal.fire({
                 position: 'top-end',

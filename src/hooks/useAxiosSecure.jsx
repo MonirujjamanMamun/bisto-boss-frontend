@@ -38,10 +38,11 @@ const useAxiosSecure = () => {
         if (error.response.status === 401) {
           // Handle unauthorized access (e.g., redirect to login)
           console.error('Unauthorized! Redirecting to login...');
-          QueryClient.clear();
           localStorage.removeItem('token');
           await logout();
           navigate('/auth/login');
+          // window.location.pathname('/auth/login');
+          QueryClient.clear();
         }
       }
       return Promise.reject(error);

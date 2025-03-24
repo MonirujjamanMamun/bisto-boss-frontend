@@ -16,7 +16,7 @@ const LogIn = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, setUser } = useAuth();
   const from = location.state?.from?.pathname || '/';
   const onSubmit = (data) => {
     try {
@@ -28,7 +28,10 @@ const LogIn = () => {
           };
           axiosPublic.post('/login', userInfo).then((result) => {
             if (result) {
-              // console.log('form log result', result);
+              setUser((pre) => ({
+                ...pre,
+                ...result.data.findUser,
+              }));
               setToken(result.data.token);
               reset();
               Swal.fire({

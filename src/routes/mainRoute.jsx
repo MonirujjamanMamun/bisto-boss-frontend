@@ -115,8 +115,10 @@ const router = createBrowserRouter([
         element: <ManageItem />,
       },
       {
-        path: 'manageitem/manageitemedit',
+        path: 'manageitemedit/:id',
         element: <ManageItemEdit />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_BASE_URL}/editmenu/${params.id}`),
       },
       {
         path: 'managebooking',

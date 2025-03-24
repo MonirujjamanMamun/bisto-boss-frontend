@@ -13,9 +13,10 @@ import { FaCartShopping } from 'react-icons/fa6';
 import { TbCalendarShare } from 'react-icons/tb';
 import { MdEmail, MdReviews } from 'react-icons/md';
 import { IoMenu } from 'react-icons/io5';
-
+import useAuth from '../../hooks/useAuth';
 
 const DashboardLayout = () => {
+  const { user } = useAuth();
   const activeLink = ({
     isActive,
   }) => `flex items-center text-[16px] font-bold uppercase
@@ -28,25 +29,25 @@ const DashboardLayout = () => {
           Admin Home
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/additem'} className={activeLink}>
           <ImSpoonKnife className="w-6 h-6 mr-1" />
           add items
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/manageitem'} className={activeLink}>
           <FaList className="w-6 h-6 mr-1" />
           manage items
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/managebooking'} className={activeLink}>
           <FaBook className="w-6 h-6 mr-1" />
           Manage bookings
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/alluser'} className={activeLink}>
           <FaUsers className="w-6 h-6 mr-1" />
           all users
@@ -56,37 +57,37 @@ const DashboardLayout = () => {
   );
   const userNavLink = (
     <>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/userhome'} className={activeLink}>
           <IoMdHome className="w-6 h-6 mr-1" />
           User Home
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/reservation'} className={activeLink}>
           <SlCalender className="w-6 h-6 mr-1" />
           reservation
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/paymenthistory'} className={activeLink}>
           <FaWallet className="w-6 h-6 mr-1" />
           payment history
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/mycart'} className={activeLink}>
           <FaCartShopping className="w-6 h-6 mr-1" />
           my cart
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/addreview'} className={activeLink}>
           <MdReviews className="w-6 h-6 mr-1" />
           add review
         </NavLink>
       </li>
-      <li className="my-6">
+      <li className="my-9">
         <NavLink to={'/dashboard/mybooking'} className={activeLink}>
           <TbCalendarShare className="w-6 h-6 mr-1" />
           my booking
@@ -96,12 +97,11 @@ const DashboardLayout = () => {
   );
   return (
     <div className="flex">
-      <div className="w-72 min-h-screen bg-[#D1A054] ps-9 pt-9">
+      <div className="w-80 min-h-screen bg-[#D1A054] ps-9 pt-9">
         <ul className="px-5">
-          {adminNavLink}
-          {userNavLink}
+          {user?.role === 'admin' ? adminNavLink : userNavLink}
           <div className="divider"></div>
-          <li className=" my-6">
+          <li className=" my-9">
             <NavLink
               to={'/'}
               className="text-[16px] ps-3 font-bold uppercase flex items-center"
@@ -110,7 +110,7 @@ const DashboardLayout = () => {
               Home
             </NavLink>
           </li>
-          <li className="my-6">
+          <li className="my-9">
             <NavLink
               to={'/menu'}
               className="flex items-center text-[16px] ps-3 font-bold uppercase"
@@ -119,7 +119,7 @@ const DashboardLayout = () => {
               Menu
             </NavLink>
           </li>
-          <li className="my-6">
+          <li className="my-9">
             <NavLink
               to={'/shop/salad'}
               className="flex items-center text-[16px] ps-3 font-bold uppercase"
@@ -128,7 +128,7 @@ const DashboardLayout = () => {
               Shop
             </NavLink>
           </li>
-          <li className="my-6">
+          <li className="my-9">
             <NavLink
               to={'/contactus'}
               className="flex items-center text-[16px] ps-3 font-bold uppercase"
@@ -139,7 +139,7 @@ const DashboardLayout = () => {
           </li>
         </ul>
       </div>
-      <div className="ps-11 w-full pt-3 pr-3">
+      <div className="ps-4 w-full pt-3 pr-3">
         <Outlet />
       </div>
     </div>
