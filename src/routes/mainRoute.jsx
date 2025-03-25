@@ -117,8 +117,17 @@ const router = createBrowserRouter([
       {
         path: 'manageitemedit/:id',
         element: <ManageItemEdit />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BASE_URL}/editmenu/${params.id}`),
+        loader: async ({ params }) => {
+          const response = await fetch(
+            `${import.meta.env.VITE_BASE_URL}/menu/${params.id}`
+          );
+          if (!response.ok) {
+            throw new Error('Failed to load data');
+          }
+          const data = response.json();
+          console.log('router page', data);
+          return data;
+        },
       },
       {
         path: 'managebooking',

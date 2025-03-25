@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import useAuth from './useAuth';
+// import { useNavigate } from 'react-router-dom';
+// import useAuth from './useAuth';
 import { QueryClient } from '@tanstack/react-query';
 
 // Create an Axios instance
@@ -12,8 +12,8 @@ const axiosInstance = axios.create({
 });
 
 const useAxiosSecure = () => {
-  const navigate = useNavigate();
-  const { logout } = useAuth();
+  // const navigate = useNavigate();
+  // const { logout } = useAuth();
   // Request Interceptor
   axiosInstance.interceptors.request.use(
     (config) => {
@@ -38,10 +38,10 @@ const useAxiosSecure = () => {
         if (error.response.status === 401) {
           // Handle unauthorized access (e.g., redirect to login)
           console.error('Unauthorized! Redirecting to login...');
-          localStorage.removeItem('token');
-          await logout();
-          navigate('/auth/login');
-          // window.location.pathname('/auth/login');
+          localStorage.removeItem('access-token');
+          // await logout();
+          // navigate('/auth/login');
+          window.location.pathname('/auth/login');
           QueryClient.clear();
         }
       }

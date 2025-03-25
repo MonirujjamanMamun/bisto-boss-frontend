@@ -99,7 +99,7 @@ const DashboardLayout = () => {
     <div className="flex">
       <div className="w-80 min-h-screen bg-[#D1A054] ps-9 pt-9">
         <ul className="px-5">
-          {user?.role === 'admin' ? adminNavLink : userNavLink}
+          {user?.user === 'admin' ? adminNavLink : userNavLink}
           <div className="divider"></div>
           <li className=" my-9">
             <NavLink

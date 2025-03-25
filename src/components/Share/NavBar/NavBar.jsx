@@ -7,7 +7,7 @@ import useCart from '../../../hooks/useCart';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
-  // console.log('user from navbar', user);
+  console.log('user from navbar', user);
   const [cart, refetch] = useCart();
   // console.log('navebar cart', cart);
 
@@ -19,9 +19,11 @@ const NavBar = () => {
         </Link>
       </li>
       <li>
-        <Link to={'/dashboard'} className="uppercase">
-          DashBoard
-        </Link>
+        {user?.user && (
+          <Link to={'/dashboard'} className="uppercase">
+            DashBoard
+          </Link>
+        )}
       </li>
       <li>
         <Link to={'/menu'} className="uppercase">

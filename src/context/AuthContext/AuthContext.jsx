@@ -8,6 +8,7 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import app from '../../firebase/firebase.config';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 // create a context
 export const AuthContext = createContext(null);
@@ -18,6 +19,7 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
+  const axiosSecure = useAxiosSecure();
   const [user, setUser] = useState(null);
   console.log('user from authcontext', user);
   const [loading, setLoading] = useState(true);
@@ -26,6 +28,18 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
+      if (currentUser) {
+        axiosSecure
+          .get('/userrole')
+          .then((res) => {
+            setUser((pre) => ({
+              ...pre,
+              ...res.data,
+            }));
+          })
+
+          .catch((err) => console.log('userrole error', err));
+      }
     });
     return () => unsubscribe();
   }, []);

@@ -20,7 +20,6 @@ const AddItem = () => {
   const axiosSecure = useAxiosSecure();
   const onSubmit = async (data) => {
     const imgFile = { image: data.fileUpload[0] };
-    console.log(data);
     const res = await axiosPublic.post(imgbb_api, imgFile, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -35,7 +34,6 @@ const AddItem = () => {
         category: data.category,
         price: data.price,
       };
-      console.log('menuItem', menuItem);
       const itemRes = await axiosSecure.post('/menu', menuItem);
       if (itemRes.data.success) {
         reset();
@@ -48,7 +46,6 @@ const AddItem = () => {
         });
       }
     }
-    console.log('with image url', res.data);
   };
   return (
     <div>
