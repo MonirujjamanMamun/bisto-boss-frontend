@@ -5,7 +5,6 @@ import { CiLocationOn } from 'react-icons/ci';
 import { IoTimeOutline } from 'react-icons/io5';
 import { Helmet } from 'react-helmet-async';
 import { FaCalendar } from 'react-icons/fa';
-import PaymentPage from '../../../../components/Dashboard/User/PaymentPage/PaymentPage';
 
 const Reservation = () => {
   return (
@@ -117,7 +116,7 @@ const Reservation = () => {
           </div>
         </section>
       </div>
-      <PaymentPage />
+
       {/* ************** */}
       <Title hading={'OUR LOCATION'} subHading={'Visit Us'} />
       <div className="container mx-auto my-11">

@@ -4,8 +4,11 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { setToken } from '../../utils/setToken';
 import useAuth from '../../hooks/useAuth';
+import Spiner from '../../components/Share/Spiner/Spiner';
+import { useState } from 'react';
 
 const LogIn = () => {
+  const [firebaseErrors, setFirebaseErrors] = useState('');
   const axiosPublic = useAxiosPublic();
   const {
     register,
@@ -16,38 +19,52 @@ const LogIn = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, loading, setUser, setLoading } = useAuth();
   const from = location.state?.from?.pathname || '/';
   const onSubmit = (data) => {
     try {
-      login(data.email, data.password).then((res) => {
-        if (res) {
-          const userInfo = {
-            uid: res.user.uid,
-            email: res.user.email,
-          };
-          axiosPublic.post('/login', userInfo).then((result) => {
-            if (result) {
-              setToken(result.data.token);
-              reset();
-              Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'User Login Successful.',
-                showConfirmButton: false,
-                timer: 1500,
-              });
-              navigate(from, { replace: true });
-            }
-          });
-        }
-      });
+      login(data.email, data.password)
+        .then((res) => {
+          if (res) {
+            const userInfo = {
+              uid: res.user.uid,
+              email: res.user.email,
+            };
+            axiosPublic.post('/login', userInfo).then((result) => {
+              if (result) {
+                setUser((pre) => ({
+                  ...pre,
+                  ...res.data,
+                }));
+                setToken(result.data.token);
+                reset();
+                setFirebaseErrors('');
+                Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'User Login Successful.',
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+                navigate(from, { replace: true });
+              }
+            });
+          }
+        })
+        .catch((error) => {
+          setLoading(false);
+          setFirebaseErrors(error.message);
+          console.log('error from login promiss', error.message);
+        });
       // console.log('user login');
     } catch (error) {
       console.log('user login error', error.message);
+      setLoading(false);
+      setFirebaseErrors(error.message);
     }
   };
 
+  if (loading) return <Spiner />;
   return (
     <section className="mt-11">
       <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">
@@ -92,6 +109,7 @@ const LogIn = () => {
                 Forgot Password?
               </a>
             </div>
+            {firebaseErrors && <p className="text-red-600">{firebaseErrors}</p>}
           </div>
           <input
             type="submit"

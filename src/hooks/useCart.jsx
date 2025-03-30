@@ -6,7 +6,7 @@ const useCart = () => {
   const token = localStorage.getItem('access-token');
 
   const { refetch, data: cart = [] } = useQuery({
-    queryKey: ['cart'],
+    queryKey: ['cart', 'token'],
     queryFn: async () => {
       if (!token) return [];
       const res = await axiosSecure.get('/cart');

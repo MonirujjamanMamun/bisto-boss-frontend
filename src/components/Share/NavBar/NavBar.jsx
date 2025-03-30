@@ -93,9 +93,9 @@ const NavBar = () => {
           <Link to="/dashboard/mycart">
             <div className="relative w-fit mx-3">
               <GiShoppingCart className="text-4xl" />
-              {cart?.cartItems?.length > 0 && (
+              {cart?.cart?.items?.length > 0 && (
                 <span className="absolute -right-1 -top-2 flex size-6 items-center justify-center rounded-full bg-red-500 text-center text-[15px] text-white font-bold">
-                  {cart.cartItems.length}
+                  {cart.cart.items.length}
                 </span>
               )}
             </div>

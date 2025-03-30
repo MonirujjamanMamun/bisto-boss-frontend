@@ -20,7 +20,7 @@ const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
   const axiosSecure = useAxiosSecure();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState([]);
   console.log('user from authcontext', user);
   const [loading, setLoading] = useState(true);
 
@@ -37,7 +37,6 @@ const AuthProvider = ({ children }) => {
               ...res.data,
             }));
           })
-
           .catch((err) => console.log('userrole error', err));
       }
     });
@@ -65,6 +64,7 @@ const AuthProvider = ({ children }) => {
     user,
     setUser,
     loading,
+    setLoading,
     registerUser,
     login,
     logout,
