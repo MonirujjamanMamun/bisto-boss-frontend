@@ -12,7 +12,7 @@ const SingleFood = ({ item }) => {
   const [, refetch] = useCart();
   const navigate = useNavigate();
   const handelAddToCart = (item) => {
-    if (user && user.email) {
+    if ((user && user?.email) || user?.user?.email) {
       axiosSecure
         .post('/cart', { menuItemId: item._id, quantity: 1 })
         .then((res) => {

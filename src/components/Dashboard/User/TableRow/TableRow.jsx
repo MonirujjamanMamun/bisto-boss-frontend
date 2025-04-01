@@ -4,12 +4,12 @@ import Swal from 'sweetalert2';
 import useCart from '../../../../hooks/useCart';
 
 const TableRow = ({ i, item }) => {
-  const [, refetch] = useCart();
+  const [cart, refetch] = useCart();
+  console.log('tablerow', cart);
   const axiosSecure = useAxiosSecure();
   const { _id, name, image, price } = item.menuItemId;
   // console.log('table row', item.menuItemId);
   const handelDelete = (id) => {
-    console.log('id from delete handelar', id);
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -22,7 +22,10 @@ const TableRow = ({ i, item }) => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/deletecart/${id}`).then((res) => {
           if (res.data.success) {
-            refetch();
+            if (cart.length > 0) {
+              refetch();
+            }
+
             Swal.fire({
               position: 'center',
               icon: 'success',

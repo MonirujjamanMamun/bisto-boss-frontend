@@ -130,7 +130,7 @@ const router = createBrowserRouter([
             throw new Error('Failed to load data');
           }
           const data = response.json();
-          console.log('router page', data);
+          // console.log('router page', data);
           return data;
         },
       },

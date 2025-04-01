@@ -32,7 +32,7 @@ const Register = () => {
           // console.log('update user', updatedUser);
           axiosPublic.post('/register', updatedUser).then((res) => {
             if (res) {
-              console.log('from register page', res);
+              // console.log('from register page', res);
 
               setToken(res.data.token);
               Swal.fire({

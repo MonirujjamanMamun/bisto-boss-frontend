@@ -4,7 +4,7 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { setToken } from '../../utils/setToken';
 import useAuth from '../../hooks/useAuth';
-import Spiner from '../../components/Share/Spiner/Spiner';
+// import Spiner from '../../components/Share/Spiner/Spiner';
 import { useState } from 'react';
 
 const LogIn = () => {
@@ -19,7 +19,7 @@ const LogIn = () => {
 
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, loading, setUser, setLoading } = useAuth();
+  const { login, setUser, setLoading } = useAuth();
   const from = location.state?.from?.pathname || '/';
   const onSubmit = (data) => {
     try {
@@ -32,10 +32,11 @@ const LogIn = () => {
             };
             axiosPublic.post('/login', userInfo).then((result) => {
               if (result) {
-                setUser((pre) => ({
-                  ...pre,
+                setUser(() => ({
+                  ...res,
                   ...res.data,
                 }));
+                setLoading(false);
                 setToken(result.data.token);
                 reset();
                 setFirebaseErrors('');
@@ -64,7 +65,7 @@ const LogIn = () => {
     }
   };
 
-  if (loading) return <Spiner />;
+  // if (loading) return <Spiner />;
   return (
     <section className="mt-11">
       <div className="mx-auto w-full max-w-md space-y-4 rounded-lg border bg-white p-10 shadow-lg dark:border-zinc-700 dark:bg-zinc-900">

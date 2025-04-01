@@ -3,11 +3,12 @@ import { Link } from 'react-router-dom';
 import { removeToken } from '../../../utils/removeToken';
 import useAuth from '../../../hooks/useAuth';
 import useCart from '../../../hooks/useCart';
+// import Spiner from '../Spiner/Spiner';
 // import { QueryClient } from '@tanstack/react-query';
 
 const NavBar = () => {
   const { user, logout } = useAuth();
-  console.log('user from navbar', user);
+  // console.log('user from navbar', user);
   const [cart, refetch] = useCart();
   // console.log('navebar cart', cart);
 
@@ -42,12 +43,18 @@ const NavBar = () => {
       </li>
     </>
   );
+  // if (loading) {
+  //   return <Spiner />;
+  // }
   const handelLogOut = async () => {
     try {
+      // setLoading(false);
       await logout();
       // QueryClient.clear();
       removeToken();
-      refetch();
+      if (cart.length > 0) {
+        refetch();
+      }
     } catch (error) {
       console.log('logout error', error.message);
     }
@@ -100,7 +107,9 @@ const NavBar = () => {
               )}
             </div>
           </Link>
-          {user && <button>{user?.displayName}</button>}
+          {user && (
+            <button>{user?.user?.displayName || user?.displayName}</button>
+          )}
           {user ? (
             <>
               <button

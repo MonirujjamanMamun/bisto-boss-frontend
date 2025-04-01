@@ -8,7 +8,9 @@ const useCart = () => {
   const { refetch, data: cart = [] } = useQuery({
     queryKey: ['cart', 'token'],
     queryFn: async () => {
-      if (!token) return [];
+      if (!token) {
+        throw new Error('No access token found');
+      }
       const res = await axiosSecure.get('/cart');
       return res.data;
     },

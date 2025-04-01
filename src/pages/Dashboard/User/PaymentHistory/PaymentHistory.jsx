@@ -8,8 +8,8 @@ const PaymentHistory = () => {
     queryKey: ['payments'],
     queryFn: async () => {
       const res = await axiosSecure.get('paymenthistory');
-      console.log('payment res', res.data);
-      console.log('payment history', res.data.paymentList);
+      // console.log('payment res', res.data);
+      // console.log('payment history', res.data.paymentList);
       return res.data.paymentList;
     },
   });

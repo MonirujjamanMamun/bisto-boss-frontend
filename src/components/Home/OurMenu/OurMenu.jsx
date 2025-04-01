@@ -2,6 +2,7 @@ import Title from '../../Share/Title/Title';
 import MenuItem from '../../Share/MenuItem/MenuItem';
 import MenuButton from '../../Share/MenuButton/MenuButton';
 import useMenu from '../../../hooks/useMenu';
+import { Link } from 'react-router-dom';
 
 const OurMenu = () => {
   // const [menu, setMenu] = useState([]);
@@ -25,7 +26,9 @@ const OurMenu = () => {
         ))}
       </div>
       <div className="text-center mb-5">
-        <MenuButton title="View Full  Menu" />
+        <Link to={'/shop/salad'}>
+          <MenuButton title="View Full  Menu" />
+        </Link>
       </div>
     </div>
   );

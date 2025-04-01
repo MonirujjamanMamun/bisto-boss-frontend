@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      setLoading(false);
+      // setLoading();
       if (currentUser) {
         axiosSecure
           .get('/userrole')
@@ -36,12 +36,13 @@ const AuthProvider = ({ children }) => {
               ...pre,
               ...res.data,
             }));
+            setLoading(false);
           })
           .catch((err) => console.log('userrole error', err));
       }
     });
     return () => unsubscribe();
-  }, []);
+  }, [axiosSecure]);
   const registerUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);

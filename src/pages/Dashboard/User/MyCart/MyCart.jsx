@@ -5,12 +5,13 @@ import useCart from '../../../../hooks/useCart';
 import { RxCrossCircled } from 'react-icons/rx';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { QueryClient } from '@tanstack/react-query';
 
 const MyCart = () => {
   const axiosSecure = useAxiosSecure();
-  const [cart, refetch] = useCart();
+  const [cart] = useCart();
   const cartData = cart?.cart?.items;
-  console.log('my cart', cartData);
+  // console.log('my cart', cartData);
   const totalPrice = cartData
     ?.reduce((sum, item) => sum + item.menuItemId.price + item.quantity, 0)
     .toFixed(2);
@@ -27,7 +28,7 @@ const MyCart = () => {
       if (result.isConfirmed) {
         axiosSecure.delete(`/resetcart`).then((res) => {
           if (res.data.success) {
-            refetch();
+            QueryClient.invalidateQueries(['cart']);
             Swal.fire({
               position: 'center',
               icon: 'success',

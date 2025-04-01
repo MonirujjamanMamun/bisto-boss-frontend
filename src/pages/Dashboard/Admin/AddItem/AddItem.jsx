@@ -26,7 +26,7 @@ const AddItem = () => {
       },
     });
     if (res.data.success) {
-      console.log('img', res.data.data);
+      // console.log('img', res.data.data);
       const menuItem = {
         name: data.recipe,
         recipe: data.recipeDetails,

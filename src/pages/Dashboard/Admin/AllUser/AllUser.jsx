@@ -47,7 +47,7 @@ const AllUser = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.patch(`/makeadmin/${id}`).then((res) => {
-          console.log('from make admin handelar', res);
+          // console.log('from make admin handelar', res);
           if (res.data.success) {
             refetch();
             Swal.fire({
