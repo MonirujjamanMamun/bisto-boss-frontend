@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
 import { IoMdHome } from 'react-icons/io';
 import { ImSpoonKnife } from 'react-icons/im';
 import {
@@ -14,8 +14,10 @@ import { TbCalendarShare } from 'react-icons/tb';
 import { MdEmail, MdReviews } from 'react-icons/md';
 import { IoMenu } from 'react-icons/io5';
 import useAuth from '../../hooks/useAuth';
+import { useEffect } from 'react';
 
 const DashboardLayout = () => {
+  const navigate = useNavigate();
   const { user } = useAuth();
   const activeLink = ({
     isActive,
@@ -95,11 +97,21 @@ const DashboardLayout = () => {
       </li>
     </>
   );
+  useEffect(() => {
+    if (user) {
+      if (user?.user === 'admin') {
+        navigate('/dashboard/adminhome', { replace: true });
+      } else {
+        navigate('/dashboard/userhome', { replace: true });
+      }
+    }
+  }, [user, navigate]);
   return (
     <div className="flex">
       <div className="w-80 min-h-screen bg-[#D1A054] ps-9 pt-9">
         <ul className="px-5">
           {user?.user === 'admin' ? adminNavLink : userNavLink}
+          {/* {user ? (user?.user === 'admin' ? adminNavLink : userNavLink) : null} */}
           <div className="divider"></div>
           <li className=" my-9">
             <NavLink

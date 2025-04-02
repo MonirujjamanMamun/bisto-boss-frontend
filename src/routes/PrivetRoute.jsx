@@ -9,11 +9,10 @@ const PrivetRoute = ({ children }) => {
     return <Spiner />;
   }
 
-  return user ? (
-    children
-  ) : (
-    <Navigate to={'/auth/login'} state={{ from: location }} replace />
-  );
+  if (user) {
+    return children;
+  }
+  return <Navigate to={'/auth/login'} state={{ from: location }} replace />;
 };
 
 export default PrivetRoute;

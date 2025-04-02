@@ -34,7 +34,7 @@ const LogIn = () => {
               if (result) {
                 setUser(() => ({
                   ...res,
-                  ...res.data,
+                  ...result?.data,
                 }));
                 setLoading(false);
                 setToken(result.data.token);

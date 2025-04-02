@@ -38,19 +38,25 @@ const AuthProvider = ({ children }) => {
             }));
             setLoading(false);
           })
-          .catch((err) => console.log('userrole error', err));
+          .catch((err) => {
+            setLoading(false);
+            console.log('userrole error', err);
+          });
       }
     });
     return () => unsubscribe();
   }, [axiosSecure]);
+
   const registerUser = (email, password) => {
     setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
+
   const login = (email, password) => {
     setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const logout = () => {
     setLoading(true);
     return signOut(auth);

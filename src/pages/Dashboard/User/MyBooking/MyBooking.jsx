@@ -1,7 +1,7 @@
 const MyBooking = () => {
   return (
-    <div>
-      <h1>This is User Dashboard MyBooking Component</h1>
+    <div className=" flex items-center justify-center h-screen">
+      <h1 className="text-4xl">Coming Soon, Working on it</h1>
     </div>
   );
 };
