@@ -98,11 +98,14 @@ const DashboardLayout = () => {
     </>
   );
   useEffect(() => {
-    if (user) {
-      if (user?.user === 'admin') {
-        navigate('/dashboard/adminhome', { replace: true });
-      } else {
-        navigate('/dashboard/userhome', { replace: true });
+    if (window.location.pathname === '/dashboard') {
+      if (user) {
+        console.log('form dashboard', user?.user?.role);
+        if (user?.user?.role === 'admin') {
+          navigate('/dashboard/adminhome', { replace: true });
+        } else {
+          navigate('/dashboard/userhome', { replace: true });
+        }
       }
     }
   }, [user, navigate]);
@@ -110,7 +113,7 @@ const DashboardLayout = () => {
     <div className="flex">
       <div className="w-80 min-h-screen bg-[#D1A054] ps-9 pt-9">
         <ul className="px-5">
-          {user?.user === 'admin' ? adminNavLink : userNavLink}
+          {user?.user?.role === 'admin' ? adminNavLink : userNavLink}
           {/* {user ? (user?.user === 'admin' ? adminNavLink : userNavLink) : null} */}
           <div className="divider"></div>
           <li className=" my-9">

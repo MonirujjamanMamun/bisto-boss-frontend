@@ -23,6 +23,7 @@ import AllUser from '../pages/Dashboard/Admin/AllUser/AllUser';
 import ManageItemEdit from '../pages/Dashboard/Admin/ManageItem/ManageItemEdit';
 import Payment from '../pages/Dashboard/User/Payment/Payment';
 import ErrorPage from '../../ErrorPage';
+import AdminRoute from './AdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -111,19 +112,35 @@ const router = createBrowserRouter([
       // for Admin dashboard
       {
         path: 'adminhome',
-        element: <AdminHome />,
+        element: (
+          <AdminRoute>
+            <AdminHome />
+          </AdminRoute>
+        ),
       },
       {
         path: 'additem',
-        element: <AddItem />,
+        element: (
+          <AdminRoute>
+            <AddItem />
+          </AdminRoute>
+        ),
       },
       {
         path: 'manageitem',
-        element: <ManageItem />,
+        element: (
+          <AdminRoute>
+            <ManageItem />
+          </AdminRoute>
+        ),
       },
       {
         path: 'manageitemedit/:id',
-        element: <ManageItemEdit />,
+        element: (
+          <AdminRoute>
+            <ManageItemEdit />
+          </AdminRoute>
+        ),
         loader: async ({ params }) => {
           const response = await fetch(
             `${import.meta.env.VITE_BASE_URL}/menu/${params.id}`
@@ -138,11 +155,19 @@ const router = createBrowserRouter([
       },
       {
         path: 'managebooking',
-        element: <ManageBooking />,
+        element: (
+          <AdminRoute>
+            <ManageBooking />
+          </AdminRoute>
+        ),
       },
       {
         path: 'alluser',
-        element: <AllUser />,
+        element: (
+          <AdminRoute>
+            <AllUser />
+          </AdminRoute>
+        ),
       },
     ],
   },

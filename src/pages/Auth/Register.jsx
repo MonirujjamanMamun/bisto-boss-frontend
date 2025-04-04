@@ -4,9 +4,14 @@ import useAxiosPublic from '../../hooks/useAxiosPublic';
 import Swal from 'sweetalert2';
 import { setToken } from '../../utils/setToken';
 import useAuth from '../../hooks/useAuth';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const Register = () => {
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
+  const navigate = useNavigate();
+  const { setUser, registerUser, updateUserProfile, setLoading } = useAuth();
+
   const {
     register,
     reset,
@@ -14,26 +19,35 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const navigate = useNavigate();
-  const { registerUser, updateUserProfile } = useAuth();
-
   const onSubmit = (data) => {
     try {
       registerUser(data.email, data.password).then((result) => {
         const user = result.user;
-        // console.log('user', user);
-        updateUserProfile(data.name, data.photoUrl).then(() => {
+        updateUserProfile(data.name, data.photoUrl).then((updateRes) => {
           // Refetch user to get updated name
+          setUser(updateRes);
           const updatedUser = {
             uid: user.uid,
-            name: data.name, // Use manually provided name instead
+            name: data.name,
             email: data.email,
           };
-          // console.log('update user', updatedUser);
+
           axiosPublic.post('/register', updatedUser).then((res) => {
             if (res) {
-              // console.log('from register page', res);
-
+              axiosSecure
+                .get('/userrole')
+                .then((response) => {
+                  console.log('response', response);
+                  setUser((pre) => ({
+                    ...pre,
+                    ...response.data,
+                  }));
+                  setLoading(false);
+                })
+                .catch((err) => {
+                  setLoading(false);
+                  console.log('userrole error', err);
+                });
               setToken(res.data.token);
               Swal.fire({
                 position: 'top-end',

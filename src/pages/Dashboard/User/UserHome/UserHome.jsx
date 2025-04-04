@@ -8,7 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const Home = () => {
   const { user } = useAuth();
-  const userName = user ? user?.user?.displayName || user?.displayName : 'Back';
+  const userName = user ? user?.user?.name || user?.displayName : 'Back';
 
   const axiosSecure = useAxiosSecure();
   const { data: payments = [] } = useQuery({

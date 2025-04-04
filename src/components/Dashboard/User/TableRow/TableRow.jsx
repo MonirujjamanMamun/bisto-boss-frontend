@@ -5,7 +5,6 @@ import useCart from '../../../../hooks/useCart';
 
 const TableRow = ({ i, item }) => {
   const [cart, refetch] = useCart();
-  console.log('tablerow', cart);
   const axiosSecure = useAxiosSecure();
   const { _id, name, image, price } = item.menuItemId;
   // console.log('table row', item.menuItemId);

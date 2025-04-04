@@ -107,9 +107,7 @@ const NavBar = () => {
               )}
             </div>
           </Link>
-          {user && (
-            <button>{user?.user?.displayName || user?.displayName}</button>
-          )}
+          {user && <button>{user?.user?.name || user?.displayName}</button>}
           {user ? (
             <>
               <button

@@ -6,10 +6,12 @@ import { setToken } from '../../utils/setToken';
 import useAuth from '../../hooks/useAuth';
 // import Spiner from '../../components/Share/Spiner/Spiner';
 import { useState } from 'react';
+import useAxiosSecure from '../../hooks/useAxiosSecure';
 
 const LogIn = () => {
   const [firebaseErrors, setFirebaseErrors] = useState('');
   const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const {
     register,
     reset,
@@ -36,8 +38,22 @@ const LogIn = () => {
                   ...res,
                   ...result?.data,
                 }));
-                setLoading(false);
                 setToken(result.data.token);
+                axiosSecure
+                  .get('/userrole')
+                  .then((response) => {
+                    console.log('response', response);
+                    setUser((pre) => ({
+                      ...pre,
+                      ...response.data,
+                    }));
+                    setLoading(false);
+                  })
+                  .catch((err) => {
+                    setLoading(false);
+                    console.log('userrole error', err);
+                  });
+                setLoading(false);
                 reset();
                 setFirebaseErrors('');
                 Swal.fire({

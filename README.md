@@ -32,7 +32,7 @@ Bisto Boss is a full-stack web application featuring a modern user-friendly fron
 
 - **React.js**: Component-based UI development
 - **React Router**: Dynamic page navigation
-- **Tailwind CSS & DaisyUI**: Responsive and modern UI
+- **Tailwind CSS**: Responsive and modern UI
 - **TanStack React Query**: Efficient state management
 - **Axios**: API handling
 - **Recharts**: Data visualization
@@ -53,7 +53,7 @@ Bisto Boss is a full-stack web application featuring a modern user-friendly fron
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/MonirujjamanMamun/bisto-boss-frontend
+   git clone https://github.com/MonirujjamanMamun/bisto-boss-frontend.git
    cd bisto-boss-frontend
    ```
 2. Install dependencies:
@@ -77,7 +77,7 @@ Bisto Boss is a full-stack web application featuring a modern user-friendly fron
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/MonirujjamanMamun/bisto-boss-backend
+   git clone https://github.com/MonirujjamanMamun/bisto-boss-backend.git
    cd bisto-boss-backend
    ```
 2. Install dependencies:
